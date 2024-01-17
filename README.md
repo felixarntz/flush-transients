@@ -6,6 +6,8 @@
 
 This plugin allows you to flush WordPress transients, plain and simple.
 
+<img width="992" alt="The admin bar entry to flush transients" src="https://github.com/felixarntz/flush-transients/assets/3531426/5ba63b27-3431-4ba2-8776-1ec224007062">
+
 Just like many other plugins offer a feature to flush the WordPress object cache, this plugin allows to flush transients.
 
 Many WordPress sites do not have access to an object cache in their hosting environment, and for those sites transients are the only mechanism for caching data which WordPress natively supports. Being able to clear transients can be crucial for certain use-cases, particularly on sites that do not use an object cache.
