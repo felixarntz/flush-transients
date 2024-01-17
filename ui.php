@@ -25,7 +25,7 @@ function flush_transients_handle_flush_action() {
 	}
 
 	if ( ! flush_transients_can_flush_transients( $type ) ) {
-		wp_die( __( 'Sorry, you are not allowed to flush transients.', 'flush-transients' ), '', 403 );
+		wp_die( esc_html__( 'Sorry, you are not allowed to flush transients.', 'flush-transients' ), '', 403 );
 	}
 
 	$result = 'error';
@@ -57,12 +57,14 @@ add_action( 'admin_action_flush_transients', 'flush_transients_handle_flush_acti
  * @access private
  */
 function flush_transients_admin_notice() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	if ( empty( $_REQUEST['flush_transient_result'] ) ) {
 		return;
 	}
 
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$result = 'error' === $_REQUEST['flush_transient_result'] ? 'error' : 'success';
-	if ( 'error' === $result &&  wp_using_ext_object_cache() ) {
+	if ( 'error' === $result && wp_using_ext_object_cache() ) {
 		$message  = __( 'Flushing transients in the object cache failed.', 'flush-transients' );
 		$message .= '<br>';
 		$message .= __( 'This is most likely because your object cache implementation does not support flushing cache groups.', 'flush-transients' );
@@ -108,8 +110,10 @@ function flush_transients_admin_bar_menu( $admin_bar ) {
 	} else {
 		$transient_count = flush_transients_query_db_transient_count( $type );
 		if ( is_network_admin() ) {
+			/* translators: %s: number of transients */
 			$title = sprintf( _n( 'Flush %s network transient', 'Flush %s network transients', $transient_count, 'flush-transients' ), $transient_count );
 		} else {
+			/* translators: %s: number of transients */
 			$title = sprintf( _n( 'Flush %s transient', 'Flush %s transients', $transient_count, 'flush-transients' ), $transient_count );
 		}
 	}
@@ -118,9 +122,9 @@ function flush_transients_admin_bar_menu( $admin_bar ) {
 
 	$admin_bar->add_node(
 		array(
-			'id'     => 'flush-transients',
-			'title'  => $title,
-			'href'   => add_query_arg( $action_url_args, $base_url ),
+			'id'    => 'flush-transients',
+			'title' => $title,
+			'href'  => add_query_arg( $action_url_args, $base_url ),
 		)
 	);
 
@@ -135,7 +139,9 @@ function flush_transients_admin_bar_menu( $admin_bar ) {
 			$title = __( 'Flush network transients', 'flush-transients' );
 		} else {
 			$transient_count = flush_transients_query_db_transient_count( 'network' );
-			$title           = sprintf( _n( 'Flush %s network transient', 'Flush %s network transients', $transient_count, 'flush-transients' ), $transient_count );
+
+			/* translators: %s: number of transients */
+			$title = sprintf( _n( 'Flush %s network transient', 'Flush %s network transients', $transient_count, 'flush-transients' ), $transient_count );
 		}
 
 		$admin_bar->add_node(

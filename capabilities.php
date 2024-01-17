@@ -34,6 +34,9 @@ function flush_transients_can_flush_transients( $type = 'regular' ) {
  * Grants the 'flush_transients' capability to users with the 'manage_options' capability.
  *
  * @since 1.0.0
+ *
+ * @param array $allcaps Map of $capability => $grant pairs.
+ * @return array Filtered $allcaps.
  */
 function flush_transients_grant_cap( $allcaps ) {
 	if ( isset( $allcaps['manage_options'] ) ) {

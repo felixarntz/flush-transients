@@ -14,10 +14,22 @@
 	<rule ref="WordPress.WP.I18n"/>
 	<config name="text_domain" value="flush-transients,default"/>
 
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="flush_transients"/>
+				<element value="flush_network_transients"/>
+			</property>
+		</properties>
+	</rule>
+
 	<arg value="ps"/>
 	<arg name="extensions" value="php"/>
 
+	<file>./capabilities.php</file>
+	<file>./db.php</file>
 	<file>./flush-transients.php</file>
+	<file>./ui.php</file>
 	<file>./tests</file>
 
 	<!--

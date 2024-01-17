@@ -32,6 +32,7 @@ function flush_transients_flush_db_transients( $type = 'regular' ) {
 
 	$result = $wpdb->query(
 		$wpdb->prepare(
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			"SELECT COUNT({$table_column}) FROM {$table_name} WHERE {$table_column} LIKE %s AND {$table_column} NOT LIKE %s",
 			$wpdb->esc_like( $transient_prefix ) . '%',
 			$wpdb->esc_like( $timeout_prefix ) . '%'
@@ -70,6 +71,7 @@ function flush_transients_query_db_transient_count( $type = 'regular' ) {
 
 	$transient_count = (int) $wpdb->get_var(
 		$wpdb->prepare(
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			"SELECT COUNT({$table_column}) FROM {$table_name} WHERE {$table_column} LIKE %s AND {$table_column} NOT LIKE %s",
 			$wpdb->esc_like( $transient_prefix ) . '%',
 			$wpdb->esc_like( $timeout_prefix ) . '%'

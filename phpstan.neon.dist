@@ -3,4 +3,7 @@ includes:
 parameters:
 	level: 4
 	paths:
+		- capabilities.php
+		- db.php
 		- flush-transients.php
+		- ui.php
