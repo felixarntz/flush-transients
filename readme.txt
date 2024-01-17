@@ -9,7 +9,7 @@ Donate link:       https://felix-arntz.me/wordpress-plugins/
 Requires at least: 5.0
 Tested up to:      6.4
 Requires PHP:      5.2
-Stable tag:        1.0.0
+Stable tag:        1.0.0-beta.1
 License:           GNU General Public License v2 (or later)
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Tags:              transients, cache, flushing, invalidation, clearing, performance, user experience, lightweight
