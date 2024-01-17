@@ -62,6 +62,10 @@ If you have ideas to improve the plugin or to solve a bug, feel free to raise an
 
 You can also contribute to the plugin by translating it. Simply visit [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/flush-transients) to get started.
 
+== Screenshots ==
+
+1. The admin bar entry to flush transients
+
 == Changelog ==
 
 = 1.0.0-beta.1 =
