@@ -33,13 +33,25 @@ function flush_transients_flush_db_transients( $type = 'regular' ) {
 	$result = $wpdb->query(
 		$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-			"SELECT COUNT({$table_column}) FROM {$table_name} WHERE {$table_column} LIKE %s AND {$table_column} NOT LIKE %s",
+			"DELETE FROM {$table_name} WHERE {$table_column} LIKE %s AND {$table_column} NOT LIKE %s",
 			$wpdb->esc_like( $transient_prefix ) . '%',
 			$wpdb->esc_like( $timeout_prefix ) . '%'
 		)
 	);
 
-	flush_transients_invalidate_caches();
+	if ( $result ) {
+		// Flush options caches (since database transients are non-persistently cached there).
+		if ( function_exists( 'wp_cache_flush_group' ) && function_exists( 'wp_cache_supports' ) && wp_cache_supports( 'flush_group' ) ) {
+			$cache_group = is_multisite() && 'network' === $type ? 'site-options' : 'options';
+			wp_cache_flush_group( $cache_group );
+		} else {
+			// No better option than full flush. This is fine though since it's a non-persistent cache anyway.
+			wp_cache_flush();
+		}
+
+		// Flush the caches for the counts.
+		flush_transients_invalidate_caches();
+	}
 
 	return false !== $result ? true : false;
 }

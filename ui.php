@@ -154,4 +154,4 @@ function flush_transients_admin_bar_menu( $admin_bar ) {
 		);
 	}
 }
-add_action( 'admin_bar_menu', 'flush_transients_admin_bar_menu' );
+add_action( 'admin_bar_menu', 'flush_transients_admin_bar_menu', 100 );

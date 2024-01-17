@@ -41,12 +41,12 @@ class Flush_Transients_DB_Tests extends WP_UnitTestCase {
 	public function test_flush_transients_flush_db_transients_network() {
 		$sample_transients = $this->get_sample_transients();
 		foreach ( $sample_transients as $transient => $value ) {
-			set_transient( $transient, $value );
+			set_site_transient( $transient, $value );
 		}
 
 		$before_flush = array();
 		foreach ( array_keys( $sample_transients ) as $transient ) {
-			$before_flush[ $transient ] = get_transient( $transient );
+			$before_flush[ $transient ] = get_site_transient( $transient );
 		}
 		$before_flush = array_filter( $before_flush );
 		$this->assertCount( count( $sample_transients ), $before_flush );
@@ -55,7 +55,7 @@ class Flush_Transients_DB_Tests extends WP_UnitTestCase {
 
 		$after_flush = array();
 		foreach ( array_keys( $sample_transients ) as $transient ) {
-			$after_flush[ $transient ] = get_transient( $transient );
+			$after_flush[ $transient ] = get_site_transient( $transient );
 		}
 		$after_flush = array_filter( $after_flush );
 		$this->assertCount( 0, $after_flush );
@@ -78,7 +78,7 @@ class Flush_Transients_DB_Tests extends WP_UnitTestCase {
 
 		$sample_transients = $this->get_sample_transients();
 		foreach ( $sample_transients as $transient => $value ) {
-			set_transient( $transient, $value );
+			set_site_transient( $transient, $value );
 		}
 
 		$new_count = flush_transients_query_db_transient_count( 'network' );
