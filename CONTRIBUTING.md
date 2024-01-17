@@ -40,6 +40,3 @@ In general, all code must follow the [WordPress Coding Standards and best practi
 * `npm run format-php`: Formats all PHP code
 * `npm run test-php`: Runs PHPUnit tests for all PHP code
 * `npm run test-php-multisite`: Runs PHPUnit tests in multisite for all PHP code
-* `npm run lint-js`: Lints all JavaScript code
-* `npm run format-js`: Formats all JavaScript code
-* `npm run build`: Builds the JavaScript code from `src` into the `build` directory
