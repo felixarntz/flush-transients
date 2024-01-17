@@ -1,0 +1,106 @@
+name: PHP Unit Testing
+
+on:
+  push:
+    branches:
+      - main
+    # Only run if PHP-related files changed.
+    paths:
+      - '.github/workflows/php-test.yml'
+      - '**.php'
+      - '.wp-env.json'
+      - '**/package.json'
+      - 'package-lock.json'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - 'composer.lock'
+  pull_request:
+    branches:
+      - main
+      - 'feature/**'
+    # Only run if PHP-related files changed.
+    paths:
+      - '.github/workflows/php-test.yml'
+      - '**.php'
+      - '.wp-env.json'
+      - '**/package.json'
+      - 'package-lock.json'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - 'composer.lock'
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  php-test:
+    name: PHP ${{ matrix.php }} - WP ${{ matrix.wordpress }}${{ matrix.experimental && ' (experimental)' || '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: true
+      matrix:
+        php:
+        - '7.4'
+        - '8.0'
+        - '8.1'
+        - '8.2'
+        wordpress: [ 'latest' ]
+        experimental: [false]
+        include:
+          - php: '5.6'
+            wordpress: '5.0'
+          - php: '5.6'
+            wordpress: '5.2'
+          - php: '7.0'
+            wordpress: '6.0'
+          - php: '8.2'
+            wordpress: 'trunk'
+            experimental: true
+    env:
+      WP_ENV_PHP_VERSION: ${{ matrix.php }}
+      WP_ENV_CORE: ${{ matrix.wordpress == 'trunk' && 'WordPress/WordPress' || format( 'https://wordpress.org/wordpress-{0}.zip', matrix.wordpress ) }}
+    continue-on-error: ${{ matrix.experimental == true }}
+    steps:
+      - uses: styfle/cancel-workflow-action@0.11.0
+
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Setup Node.js (.nvmrc)
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: npm install
+        run: npm ci
+
+      - name: Patch @wordpress/env for WordPress versions 5.0 and older
+        run: sed -i -e "s/--anchor=\"define( 'WP_DEBUG',\"/--anchor=\"define('WP_DEBUG',\"/" node_modules/@wordpress/env/lib/wordpress.js
+        if: startsWith(matrix.wordpress, '4.') || startsWith(matrix.wordpress, '5.0')
+
+      - name: Install WordPress
+        run: npm run wp-env start
+
+      - name: Fix wp-tests-config.php for WordPress versions 5.1-5.3
+        run: npm run wp-env run tests-wordpress -- sh -c "sed -i -e \"s/define( 'ABSPATH', dirname( __FILE__ ) . '\\/' );/define( 'ABSPATH', '\\/var\\/www\\/html\\/' );\\n\\tdefine( 'WP_DEFAULT_THEME', 'default' );/\" /wordpress-phpunit/wp-tests-config.php"
+        if: startsWith(matrix.wordpress, '5.') && !startsWith(matrix.wordpress, '5.0')
+
+      - name: Fix wp-tests-config.php for WordPress versions 5.0 and older
+        run: npm run wp-env run tests-wordpress -- sh -c "sed -i -e \"s/define('ABSPATH', dirname(__FILE__) . '\\/');/define( 'ABSPATH', '\\/var\\/www\\/html\\/' );\\n\\tdefine( 'WP_DEFAULT_THEME', 'default' );/\" /wordpress-phpunit/wp-tests-config.php"
+        if: startsWith(matrix.wordpress, '4.') || startsWith(matrix.wordpress, '5.0')
+
+      - name: Running PHPUnit tests
+        run: npm run test-php
+
+      - name: Running PHPUnit tests for multisite
+        run: npm run test-php-multisite
