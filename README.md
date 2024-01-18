@@ -1,3 +1,6 @@
+[![WordPress plugin version](https://img.shields.io/wordpress/plugin/v/flush-transients?style=for-the-badge)](https://wordpress.org/plugins/flush-transients/)
+[![WordPress tested version](https://img.shields.io/wordpress/plugin/tested/flush-transients?style=for-the-badge)](https://wordpress.org/plugins/flush-transients/)
+[![WordPress plugin downloads](https://img.shields.io/wordpress/plugin/dt/flush-transients?style=for-the-badge)](https://wordpress.org/plugins/flush-transients/)
 [![PHP Unit Testing](https://img.shields.io/github/actions/workflow/status/felixarntz/flush-transients/php-test.yml?style=for-the-badge&label=PHP%20Unit%20Testing)](https://github.com/felixarntz/flush-transients/actions/workflows/php-test.yml)
 [![Packagist version](https://img.shields.io/packagist/v/felixarntz/flush-transients?style=for-the-badge)](https://packagist.org/packages/felixarntz/flush-transients)
 [![Packagist license](https://img.shields.io/packagist/l/felixarntz/flush-transients?style=for-the-badge)](https://packagist.org/packages/felixarntz/flush-transients)
@@ -19,35 +22,18 @@ Both regular transients and network transients are supported. When using WordPre
 
 ## Installation and usage
 
-Eventually, once the plugin has been reviewed and approved in the WordPress plugin repository, you will be able to install it from there. Until then, you can download a ZIP from the [GitHub releases page](https://github.com/felixarntz/flush-transients/releases) and upload it to your WordPress site via _Plugins > Add New > Upload Plugin_.
+You can download the latest version from the [WordPress plugin repository](https://wordpress.org/plugins/flush-transients/).
+
+Please see the [plugin repository installation instructions](https://wordpress.org/plugins/flush-transients/#installation) for detailed information on installation and the [plugin repository FAQ](https://wordpress.org/plugins/flush-transients/#faq) for additional details on usage and customization.
 
 Alternatively, if you use Composer to manage your WordPress site, you can also [install the plugin from Packagist](https://packagist.org/packages/felixarntz/flush-transients):
 
 ```
-composer require felixarntz/flush-transients:^1.0.0-beta.1
+composer require felixarntz/flush-transients:^1.0
 ```
-
-## Frequently asked questions
-
-### Which users can flush transients?
-
-The plugin checks for a new capability `flush_transients`. By default, it is granted to any user that has the `manage_options` capability.
-
-To disable this default behavior, you can unhook the relevant function:
-
-```php
-<?php
-remove_filter( 'user_has_cap', 'flush_transients_grant_cap' );
-```
-
-Note however that in this case you will have to grant the capability in another way outside of this plugin.
-
-When using WordPress Multisite, network transients can only be flushed by network administrators by default, relying on a distinct `flush_network_transients` capability.
-
-### Where can I configure the plugin?
-
-This plugin doesn't come with a settings screen or options of any kind. You can flush transients via the admin bar menu item.
 
 ## Contributions
 
 If you have ideas to improve the plugin or to solve a bug, feel free to raise an issue or submit a pull request right here on GitHub. Please refer to the [contributing guidelines](https://github.com/felixarntz/flush-transients/blob/main/CONTRIBUTING.md) to learn more and get started.
+
+You can also contribute to the plugin by translating it. Simply visit [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/flush-transients) to get started.

@@ -1,7 +1,7 @@
 === Flush Transients ===
 
 Plugin Name:       Flush Transients
-Plugin URI:        https://github.com/felixarntz/flush-transients/
+Plugin URI:        https://wordpress.org/plugins/flush-transients/
 Author:            Felix Arntz
 Author URI:        https://felix-arntz.me
 Contributors:      flixos90
