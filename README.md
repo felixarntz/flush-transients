@@ -19,7 +19,6 @@ This plugin adds a small admin bar menu item where users with the required capab
 
 Both regular transients and network transients are supported. When using WordPress Multisite, network transients can be flushed in the Network Admin UI.
 
-
 ## Installation and usage
 
 You can download the latest version from the [WordPress plugin repository](https://wordpress.org/plugins/flush-transients/).
