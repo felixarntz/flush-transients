@@ -17,7 +17,7 @@
  * License: GNU General Public License v2 (or later)
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: flush-transients
- * Tags: transients, cache, flushing, invalidation, clearing, performance, user experience, lightweight
+ * Tags: transients, cache, flushing, invalidation, performance
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

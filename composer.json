@@ -10,10 +10,7 @@
     "cache",
     "flushing",
     "invalidation",
-    "clearing",
-    "performance",
-    "user experience",
-    "lightweight"
+    "performance"
   ],
   "homepage": "https://wordpress.org/plugins/flush-transients/",
   "authors": [
