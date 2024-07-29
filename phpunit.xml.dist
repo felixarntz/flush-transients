@@ -19,4 +19,11 @@
 			<group>ms-required</group>
 		</exclude>
 	</groups>
+	<coverage includeUncoveredFiles="true">
+		<include>
+			<file>capabilities.php</file>
+			<file>db.php</file>
+			<file>ui.php</file>
+		</include>
+	</coverage>
 </phpunit>
