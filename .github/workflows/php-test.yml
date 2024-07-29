@@ -12,6 +12,7 @@ on:
       - '**/package.json'
       - 'package-lock.json'
       - 'phpunit.xml.dist'
+      - 'tests/phpunit/multisite.xml'
       - 'composer.json'
       - 'composer.lock'
   pull_request:
@@ -26,6 +27,7 @@ on:
       - '**/package.json'
       - 'package-lock.json'
       - 'phpunit.xml.dist'
+      - 'tests/phpunit/multisite.xml'
       - 'composer.json'
       - 'composer.lock'
     types:
@@ -39,7 +41,7 @@ concurrency:
 
 jobs:
   php-test:
-    name: PHP ${{ matrix.php }} - WP ${{ matrix.wordpress }}${{ matrix.experimental && ' (experimental)' || '' }}
+    name: PHP ${{ matrix.php }} - WP ${{ matrix.wordpress }} - ${{ matrix.multisite && 'Multisite' || 'Single site' }}${{ matrix.experimental && ' (experimental)' || '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -51,16 +53,34 @@ jobs:
         - '8.1'
         - '8.2'
         wordpress: [ 'latest' ]
+        multisite: [ false, true ]
         experimental: [false]
         include:
           - php: '5.6'
             wordpress: '5.0'
+            multisite: false
+          - php: '5.6'
+            wordpress: '5.0'
+            multisite: true
           - php: '5.6'
             wordpress: '5.2'
+            multisite: false
+          - php: '5.6'
+            wordpress: '5.2'
+            multisite: true
           - php: '7.0'
             wordpress: '6.0'
+            multisite: false
+          - php: '7.0'
+            wordpress: '6.0'
+            multisite: true
           - php: '8.2'
             wordpress: 'trunk'
+            multisite: false
+            experimental: true
+          - php: '8.2'
+            wordpress: 'trunk'
+            multisite: true
             experimental: true
     env:
       WP_ENV_PHP_VERSION: ${{ matrix.php }}
@@ -104,5 +124,5 @@ jobs:
       - name: Running PHPUnit tests
         run: npm run test-php
 
-      - name: Running PHPUnit tests for multisite
-        run: npm run test-php-multisite
+      - name: Running ${{ matrix.multisite && 'multisite' || 'single site' }} unit tests
+        run: npm run test-php${{ matrix.multisite && '-multisite' || '' }}
