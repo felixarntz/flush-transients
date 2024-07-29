@@ -22,7 +22,7 @@
   },
   "repository": "git+https://github.com/felixarntz/flush-transients.git",
   "devDependencies": {
-    "@wordpress/env": "^8.7.0"
+    "@wordpress/env": "^10.4.0"
   },
   "scripts": {
     "format-php": "wp-env run cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer format",
