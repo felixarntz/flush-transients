@@ -14,7 +14,7 @@
  * Requires PHP: 5.2
  * Author: Felix Arntz
  * Author URI: https://felix-arntz.me
- * License: GNU General Public License v2 (or later)
+ * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: flush-transients
  * Tags: transients, cache, flushing, invalidation, performance
