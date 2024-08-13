@@ -1,0 +1,39 @@
+name: Plugin Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  plugin-check:
+    name: PHP ${{ matrix.php }} - WP ${{ matrix.wordpress }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: true
+      matrix:
+        php:
+        - '8.3' # Currently the wordpress/plugin-check-action always uses the latest PHP version anyway.
+        wordpress: [ 'latest' ] # Currently the wordpress/plugin-check-action only supports 'latest' or 'trunk'.
+    steps:
+      - uses: styfle/cancel-workflow-action@0.12.1
+
+      - uses: actions/checkout@v4
+
+      - name: Run plugin check
+        uses: wordpress/plugin-check-action@v1
+        with:
+          wp-version: ${{ matrix.wordpress }}
+          exclude-checks: 'file_type' # Exclude file_type because of the dev files present in the repository.
