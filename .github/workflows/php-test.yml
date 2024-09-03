@@ -106,20 +106,8 @@ jobs:
       - name: npm install
         run: npm ci
 
-      - name: Patch @wordpress/env for WordPress versions 5.0 and older
-        run: sed -i -e "s/--anchor=\"define( 'WP_DEBUG',\"/--anchor=\"define('WP_DEBUG',\"/" node_modules/@wordpress/env/lib/wordpress.js
-        if: startsWith(matrix.wordpress, '4.') || startsWith(matrix.wordpress, '5.0')
-
       - name: Install WordPress
         run: npm run wp-env start
-
-      - name: Fix wp-tests-config.php for WordPress versions 5.1-5.3
-        run: npm run wp-env run tests-wordpress -- sh -c "sed -i -e \"s/define( 'ABSPATH', dirname( __FILE__ ) . '\\/' );/define( 'ABSPATH', '\\/var\\/www\\/html\\/' );\\n\\tdefine( 'WP_DEFAULT_THEME', 'default' );/\" /wordpress-phpunit/wp-tests-config.php"
-        if: startsWith(matrix.wordpress, '5.') && !startsWith(matrix.wordpress, '5.0')
-
-      - name: Fix wp-tests-config.php for WordPress versions 5.0 and older
-        run: npm run wp-env run tests-wordpress -- sh -c "sed -i -e \"s/define('ABSPATH', dirname(__FILE__) . '\\/');/define( 'ABSPATH', '\\/var\\/www\\/html\\/' );\\n\\tdefine( 'WP_DEFAULT_THEME', 'default' );/\" /wordpress-phpunit/wp-tests-config.php"
-        if: startsWith(matrix.wordpress, '4.') || startsWith(matrix.wordpress, '5.0')
 
       - name: Running PHPUnit tests
         run: npm run test-php
