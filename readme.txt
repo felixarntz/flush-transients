@@ -1,18 +1,16 @@
 === Flush Transients ===
 
-Plugin Name:       Flush Transients
-Plugin URI:        https://wordpress.org/plugins/flush-transients/
-Author:            Felix Arntz
-Author URI:        https://felix-arntz.me
-Contributors:      flixos90
-Donate link:       https://felix-arntz.me/wordpress-plugins/
-Requires at least: 5.0
-Tested up to:      6.7
-Requires PHP:      5.2
-Stable tag:        1.0.0
-License:           GPLv2 or later
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Tags:              transients, cache, flushing, invalidation, performance
+Plugin Name:  Flush Transients
+Plugin URI:   https://wordpress.org/plugins/flush-transients/
+Author:       Felix Arntz
+Author URI:   https://felix-arntz.me
+Contributors: flixos90
+Donate link:  https://felix-arntz.me/wordpress-plugins/
+Tested up to: 6.7
+Stable tag:   1.0.0
+License:      GPLv2 or later
+License URI:  https://www.gnu.org/licenses/gpl-2.0.html
+Tags:         transients, cache, flushing, invalidation, performance
 
 This plugin allows you to flush WordPress transients, plain and simple.
 
