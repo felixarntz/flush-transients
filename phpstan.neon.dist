@@ -1,6 +1,8 @@
 includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
 parameters:
+	bootstrapFiles:
+		- build-cs/phpstan-bootstrap.php
 	level: 4
 	paths:
 		- capabilities.php

@@ -7,7 +7,7 @@ Author URI:   https://felix-arntz.me
 Contributors: flixos90
 Donate link:  https://felix-arntz.me/wordpress-plugins/
 Tested up to: 6.8
-Stable tag:   1.0.0
+Stable tag:   1.0.1
 License:      GPLv2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Tags:         transients, cache, flushing, invalidation, performance
@@ -65,6 +65,9 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 1. The admin bar entry to flush transients
 
 == Changelog ==
+
+= 1.0.1 =
+* Avoid deprecation warnings in WordPress 6.8 by using new transient action hooks.
 
 = 1.0.0 =
 * First stable release

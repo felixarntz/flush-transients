@@ -111,7 +111,13 @@ function flush_transients_invalidate_caches() {
 	wp_cache_delete( 'regular_transient_count', 'flush_transients' );
 	wp_cache_delete( 'network_transient_count', 'flush_transients' );
 }
-add_action( 'setted_transient', 'flush_transients_invalidate_caches' );
+if ( version_compare( flush_transients_get_wp_version(), '6.8', '<' ) ) {
+	// These actions are deprecated as of WordPress 6.8 in favor new actions below.
+	add_action( 'setted_transient', 'flush_transients_invalidate_caches' );
+	add_action( 'setted_site_transient', 'flush_transients_invalidate_caches' );
+} else {
+	add_action( 'set_transient', 'flush_transients_invalidate_caches' );
+	add_action( 'set_site_transient', 'flush_transients_invalidate_caches' );
+}
 add_action( 'deleted_transient', 'flush_transients_invalidate_caches' );
-add_action( 'setted_site_transient', 'flush_transients_invalidate_caches' );
 add_action( 'deleted_site_transient', 'flush_transients_invalidate_caches' );

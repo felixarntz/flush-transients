@@ -9,9 +9,14 @@
 class Flush_Transients_DB_Tests extends WP_UnitTestCase {
 
 	public function test_hooks() {
-		$this->assertSame( 10, has_action( 'setted_transient', 'flush_transients_invalidate_caches' ) );
+		if ( version_compare( flush_transients_get_wp_version(), '6.8', '<' ) ) {
+			$this->assertSame( 10, has_action( 'setted_transient', 'flush_transients_invalidate_caches' ) );
+			$this->assertSame( 10, has_action( 'setted_site_transient', 'flush_transients_invalidate_caches' ) );
+		} else {
+			$this->assertSame( 10, has_action( 'set_transient', 'flush_transients_invalidate_caches' ) );
+			$this->assertSame( 10, has_action( 'set_site_transient', 'flush_transients_invalidate_caches' ) );
+		}
 		$this->assertSame( 10, has_action( 'deleted_transient', 'flush_transients_invalidate_caches' ) );
-		$this->assertSame( 10, has_action( 'setted_site_transient', 'flush_transients_invalidate_caches' ) );
 		$this->assertSame( 10, has_action( 'deleted_site_transient', 'flush_transients_invalidate_caches' ) );
 	}
 
