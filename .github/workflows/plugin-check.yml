@@ -39,4 +39,5 @@ jobs:
           exclude-checks: 'file_type' # Exclude file_type because of the dev files present in the repository.
           exclude-directories: |
             .github
+            build-cs
             tests
