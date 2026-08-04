@@ -49,11 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Validate Composer configuration
-        run: composer validate
+      - run: composer validate
 
-      - name: PHP Lint
-        run: composer lint
+      - run: composer lint
 
-      - name: PHPStan
-        run: composer phpstan
+      - run: composer phpstan
