@@ -11,7 +11,7 @@
  * Description: This plugin allows you to flush WordPress transients, plain and simple.
  * Version: 1.0.1
  * Requires at least: 5.0
- * Requires PHP: 5.2
+ * Requires PHP: 7.4
  * Author: Felix Arntz
  * Author URI: https://felix-arntz.me
  * License: GPLv2 or later
