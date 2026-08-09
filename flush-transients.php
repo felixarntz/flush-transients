@@ -10,8 +10,8 @@
  * Plugin URI: https://wordpress.org/plugins/flush-transients/
  * Description: This plugin allows you to flush WordPress transients, plain and simple.
  * Version: 1.0.1
- * Requires at least: 5.0
- * Requires PHP: 5.2
+ * Requires at least: 6.1
+ * Requires PHP: 7.4
  * Author: Felix Arntz
  * Author URI: https://felix-arntz.me
  * License: GPLv2 or later
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function flush_transients_get_wp_version() {
 	// Get unmodified `$wp_version`.
-	include ABSPATH . WPINC . '/version.php'; /* @phpstan-ignore-line */
+	include ABSPATH . WPINC . '/version.php';
 
 	if ( ! isset( $wp_version ) ) {
 		return get_bloginfo( 'version' ); // Fallback.

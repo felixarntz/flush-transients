@@ -30,6 +30,10 @@ function flush_transients_flush_db_transients( $type = 'regular' ) {
 	$transient_prefix = 'network' === $type ? '_site_transient_' : '_transient_';
 	$timeout_prefix   = 'network' === $type ? '_site_transient_timeout_' : '_transient_timeout_';
 
+	$table_name   = esc_sql( $table_name );
+	$table_column = esc_sql( $table_column );
+
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 	$result = $wpdb->query(
 		$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -81,6 +85,10 @@ function flush_transients_query_db_transient_count( $type = 'regular' ) {
 	$transient_prefix = 'network' === $type ? '_site_transient_' : '_transient_';
 	$timeout_prefix   = 'network' === $type ? '_site_transient_timeout_' : '_transient_timeout_';
 
+	$table_name   = esc_sql( $table_name );
+	$table_column = esc_sql( $table_column );
+
+	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 	$transient_count = (int) $wpdb->get_var(
 		$wpdb->prepare(
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared

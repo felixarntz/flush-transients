@@ -2,10 +2,12 @@ includes:
 	- phar://phpstan.phar/conf/bleedingEdge.neon
 parameters:
 	bootstrapFiles:
-		- build-cs/phpstan-bootstrap.php
+		- tools/php/lint/phpstan-bootstrap.php
 	level: 4
 	paths:
 		- capabilities.php
 		- db.php
 		- flush-transients.php
 		- ui.php
+	scanFiles:
+		- tools/php/lint/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php

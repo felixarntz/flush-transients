@@ -27,10 +27,10 @@
   },
   "require": {
     "composer/installers": "~1.0",
-    "php": ">=5.2"
+    "php": ">=7.4"
   },
   "require-dev": {
-    "wp-phpunit/wp-phpunit": "^5.0 || ^6.0",
+    "wp-phpunit/wp-phpunit": ">=6.1",
     "yoast/phpunit-polyfills": "^1.0"
   },
   "config": {
@@ -40,16 +40,16 @@
   },
   "scripts": {
     "format": [
-      "composer --working-dir=build-cs install",
-      "build-cs/vendor/bin/phpcbf --standard=phpcs.xml.dist"
+      "composer --working-dir=tools/php/lint install",
+      "tools/php/lint/vendor/bin/phpcbf --standard=phpcs.xml.dist"
     ],
     "lint": [
-      "composer --working-dir=build-cs install",
-      "build-cs/vendor/bin/phpcs --standard=phpcs.xml.dist"
+      "composer --working-dir=tools/php/lint install",
+      "tools/php/lint/vendor/bin/phpcs --standard=phpcs.xml.dist"
     ],
     "phpstan": [
-      "composer --working-dir=build-cs install",
-      "build-cs/vendor/bin/phpstan analyse --memory-limit=2048M"
+      "composer --working-dir=tools/php/lint install",
+      "tools/php/lint/vendor/bin/phpstan analyse --memory-limit=2048M"
     ],
     "test": "phpunit -c phpunit.xml.dist --verbose",
     "test-multisite": "WP_MULTISITE=1 phpunit -c tests/phpunit/multisite.xml --verbose"

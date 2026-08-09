@@ -12,8 +12,8 @@ The Flush Transients plugin is [licensed under the GPLv2 (or later)](/license.tx
 
 In general, all code must follow the [WordPress Coding Standards and best practices](https://developer.wordpress.org/coding-standards/). All code must furthermore satisfy the following minimum requirements:
 
-- **WordPress**: The plugin's minimum required WordPress version is 5.0.
-- **PHP**: The plugin's minimum required PHP version is 5.2.
+- **WordPress**: The plugin's minimum required WordPress version is 6.1.
+- **PHP**: The plugin's minimum required PHP version is 7.4.
 
 ## Getting started with code contributions
 
@@ -28,15 +28,15 @@ In general, all code must follow the [WordPress Coding Standards and best practi
 
 1. Install and configure the prerequisites noted above.
 2. Clone the repository (or a fork of it) into your local machine, e.g. using `git clone https://github.com/felixarntz/flush-transients.git`.
-3. Install local development dependencies by first running `npm install` (and optionally `composer install`) in the project folder.
-4. Start the local development environment via `npm run wp-env start`. The WordPress development site will be available at `http://localhost:8888` and WP admin will be available at `http://localhost:8888/wp-admin/`. You can log in to the WP Admin interface using the username `admin` and password `password`.
+3. Install local development dependencies by first running `pnpm install` (and optionally `composer install`) in the project folder.
+4. Start the local development environment via `pnpm wp-env start`. The WordPress development site will be available at `http://localhost:8888` and WP admin will be available at `http://localhost:8888/wp-admin/`. You can log in to the WP Admin interface using the username `admin` and password `password`.
 
 ### Useful commands
 
-* `npm install`: Installs local development dependencies
-* `npm run wp-env start`: Starts the local development environment
-* `npm run wp-env stop`: Stops the local development environment
-* `npm run lint-php`: Lints all PHP code
-* `npm run format-php`: Formats all PHP code
-* `npm run test-php`: Runs PHPUnit tests for all PHP code
-* `npm run test-php-multisite`: Runs PHPUnit tests in multisite for all PHP code
+* `pnpm install`: Installs local development dependencies
+* `pnpm wp-env start`: Starts the local development environment
+* `pnpm wp-env stop`: Stops the local development environment
+* `pnpm lint-php`: Lints all PHP code
+* `pnpm format-php`: Formats all PHP code
+* `pnpm test-php`: Runs PHPUnit tests for all PHP code
+* `pnpm test-php-multisite`: Runs PHPUnit tests in multisite for all PHP code
