@@ -12,7 +12,7 @@ The Flush Transients plugin is [licensed under the GPLv2 (or later)](/license.tx
 
 In general, all code must follow the [WordPress Coding Standards and best practices](https://developer.wordpress.org/coding-standards/). All code must furthermore satisfy the following minimum requirements:
 
-- **WordPress**: The plugin's minimum required WordPress version is 5.0.
+- **WordPress**: The plugin's minimum required WordPress version is 6.1.
 - **PHP**: The plugin's minimum required PHP version is 7.4.
 
 ## Getting started with code contributions
