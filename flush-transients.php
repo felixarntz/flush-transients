@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function flush_transients_get_wp_version() {
 	// Get unmodified `$wp_version`.
-	include ABSPATH . WPINC . '/version.php'; /* @phpstan-ignore-line */
+	include ABSPATH . WPINC . '/version.php';
 
 	if ( ! isset( $wp_version ) ) {
 		return get_bloginfo( 'version' ); // Fallback.
