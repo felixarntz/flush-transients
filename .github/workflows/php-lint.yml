@@ -51,6 +51,6 @@ jobs:
 
       - run: composer validate
 
-      - run: composer lint
+      - run: composer phpcs
 
       - run: composer phpstan
