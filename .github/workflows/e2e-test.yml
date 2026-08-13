@@ -1,0 +1,55 @@
+name: E2E Testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - 'feature/**'
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  e2e-test:
+    name: WP ${{ matrix.wordpress }}${{ matrix.experimental && ' (experimental)' || '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: true
+      matrix:
+        wordpress: [ '6.1', 'latest' ]
+        experimental: [false]
+        include:
+          - wordpress: 'trunk'
+            experimental: true
+    env:
+      WP_ENV_CORE: ${{ matrix.wordpress == 'trunk' && 'WordPress/WordPress' || format( 'https://wordpress.org/wordpress-{0}.zip', matrix.wordpress ) }}
+    continue-on-error: ${{ matrix.experimental == true }}
+    steps:
+      - uses: styfle/cancel-workflow-action@d07a454dad7609a92316b57b23c9ccfd4f59af66 # 0.13.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: npx playwright install chromium firefox webkit --with-deps
+      - run: pnpm wp-env start
+      - run: pnpm test:e2e
+      - uses: actions/upload-artifact/merge@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        # Don't fail the job if there aren't any artifacts to merge.
+        continue-on-error: true
+        with:
+            name: failures-artifacts
+            # Retain the merged artifacts in case of a rerun.
+            pattern: failures-artifacts*
+            delete-merged: true
