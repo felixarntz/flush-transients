@@ -26,7 +26,7 @@ jobs:
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: wordpress/plugin-check-action@98a1788320d0add90df2d8183934ecccbc4e05d2
+      - uses: uses: wordpress/plugin-check-action@10857da14b6c2246d15402b3e69f777edcf8c12e # 1.1.9
         with:
           wp-version: 'latest'
           exclude-checks: 'file_type' # Exclude file_type because of the dev files present in the repository.
