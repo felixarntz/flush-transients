@@ -22,10 +22,14 @@
     "node": ">=22.12.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@wordpress/e2e-test-utils-playwright": "^1.52.0",
     "@wordpress/env": "^11.12.0",
+    "@wordpress/scripts": "^34.0.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2"
   },
   "scripts": {
+    "test:e2e": "wp-scripts test-playwright --config tests/e2e/playwright.config.ts",
     "pretest:php": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer update",
     "test:php": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) vendor/bin/phpunit -c phpunit.xml.dist --verbose",
     "pretest:php-multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer update",
