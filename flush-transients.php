@@ -9,7 +9,7 @@
  * Plugin Name: Flush Transients
  * Plugin URI: https://wordpress.org/plugins/flush-transients/
  * Description: This plugin allows you to flush WordPress transients, plain and simple.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 6.1
  * Requires PHP: 7.4
  * Author: Felix Arntz
